@@ -17,7 +17,7 @@ class Glaces
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $ingredientSpecial = null;
+    private ?string $ingredientSpecial = 'aucun';
 
     #[ORM\ManyToOne(inversedBy: 'glace')]
     private ?TypeCone $typeCone = null;
