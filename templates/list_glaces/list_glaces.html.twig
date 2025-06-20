@@ -2,4 +2,46 @@
 
 {% block title %}Liste des Glaces{% endblock %}
 
+{% block body %}
+    <h1>Liste de nos Glaces</h1>
 
+    <table>
+
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Ingrédient Spécial</th>
+                <th>Type de cône</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for glace in glaces %}
+
+            <tr>
+                <td>{{ glace.nom }}</td>
+                <td>{{ glace.ingredientSpecial ?? '—' }}</td>
+                <td>{{ glace.typeCone ? glace.typeCone.nom : '—' }}</td>
+                <td>
+                    <a href="{{ path('app_modify', {'id': glace.id}) }}">Modifier</a>
+
+                    <form method="POST" onsubmit="return confirm('Vous êtes certain de vouloir supprimer ?')"
+                                            action="{{ path('delete_glace', {'id': glace.id}) }}">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ glace.id) }}">
+                        <input type="submit" value="Supprimer">
+                    </form>
+                </td>
+            </tr>
+
+        {% else %}
+            <tr><td colspan="5">Aucune glace trouvée.</td></tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

@@ -5,17 +5,18 @@ namespace App\Controller;
 use App\Entity\Glaces;
 use App\Form\CreateGlaceTypeForm;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-final class CreateGlaceController extends AbstractController
+final class ModifyController extends AbstractController
 {
-    #[Route('/create/glace', name: 'app_create_glace')]
-    public function app_create_glace(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/modify/{id}', name: 'app_modify')]
+    public function modify(Glaces $glace, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $glace = new Glaces();
+        
+            // $glace = new Glaces();
         
         $form = $this->createForm(CreateGlaceTypeForm::class, $glace);
 
@@ -27,14 +28,17 @@ final class CreateGlaceController extends AbstractController
 
             $entityManager->flush();
 
-            $this->addFlash('success', 'Bravo votre glace a bien été ajouter !');
+            $this->addFlash('success', 'Bravo votre glace a bien été modifiée !');
 
             return $this->redirectToRoute('app_home');
+            
         }
 
 
-        return $this->render('create_glace/create_glace.html.twig', [
+        return $this->render('modify/modify.html.twig', [
             'CreateGlace' =>$form->createView(),
         ]);
     }
 }
+
+

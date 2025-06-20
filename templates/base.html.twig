@@ -8,21 +8,38 @@
         {% block stylesheets %}
         {% endblock %}
     </head>
-    {% block body %}
+    
     <body>
+        <header>
+
+            {% block header %}
+                <div class=container>
+                    <nav class=nav>
+                        <ul>
+                            <li><a href="{{path("app_home")}}">Accueil</a></li>
+                            <li><a href="{{path("app_list_glaces")}}">Liste des Glaces</a></li>
+                            <li><a href="{{path("app_create_glace")}}">Créer une Glace</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            {% endblock %}
+    
+        </header>
+
+        <main>
         
-        {% block header %}
-            <div class=container>
-                <nav class=nav>
-                    <ul>
-                        <li><a href="{{path("app_home")}}">Accueil</a></li>
-                        <li><a href="{{path("app_list_glaces")}}">Liste des Glaces</a></li>
-                        <li><a href="{{path("app_create_glace")}}">Créer une Glace</a></li>
-                    </ul>
-                </nav>
-            </div>
-        {% endblock %}
-       
+            {% for message in app.flashes('success') %}
+                <div class= alert-success>
+                    {{ message }}
+                </div>    
+            {% endfor %}
+
+            {% block body %}
+            {% endblock %}
+
+        </main>
     </body> 
-    {% endblock %}
+
+
+   
 </html>

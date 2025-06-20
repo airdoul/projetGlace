@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une Glace{% endblock %}
+
+{% block body %}
+    <h1>Modifier la glace</h1>
+
+    {{ form_start(CreateGlace) }}
+        {{ form_widget(CreateGlace) }}
+        <button type="submit">Enregistrer les modifications</button>
+    {{ form_end(CreateGlace) }}
+{% endblock %}

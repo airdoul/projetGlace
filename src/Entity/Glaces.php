@@ -16,6 +16,12 @@ class Glaces
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $ingredientSpecial = null;
+
+    #[ORM\ManyToOne(inversedBy: 'glace')]
+    private ?TypeCone $typeCone = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +35,30 @@ class Glaces
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getIngredientSpecial(): ?string
+    {
+        return $this->ingredientSpecial;
+    }
+
+    public function setIngredientSpecial(string $ingredientSpecial): static
+    {
+        $this->ingredientSpecial = $ingredientSpecial;
+
+        return $this;
+    }
+
+    public function getTypeCone(): ?typeCone
+    {
+        return $this->typeCone;
+    }
+
+    public function setTypeCone(?typeCone $typeCone): static
+    {
+        $this->typeCone = $typeCone;
 
         return $this;
     }
